@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<center><h1>FIREWORKS</h1></center>
+	<title>box test</title>
+	<style type="text/css">
+    canvas {
+      border: solid 1px #000;
+      
+    }
+</style>
+</head><center><canvas id="canvas" width="600" height="400"></canvas></center>
+<body>
+	<script type="text/javascript">
+	var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+   
+    var box = {
+      x: 300,
+      y: 200,
+      size: 20,
+      color: "black"
+    }
+
+    function drawBox(){
+      context.fillStyle = box.color;
+      context.fillRect(box.x, box.y, box.size, box.size);
+    }
+
+    function runGame(){
+    	drawBox()
+    }
+        runGame()
+
+	</script>
+
+</body>
+</html>
