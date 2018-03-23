@@ -14,25 +14,44 @@
 	<script type="text/javascript">
 	var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
-   
-    var box = {
-      x: 300,
-      y: 200,
-      size: 20,
-      color: "black"
+    var boxes = []
+    var maxsize = 40
+
+    function createBox(){
+
+    	return{
+    		x: randomNum(canvas.width) - maxsize,
+    		y: randomNum(canvas.height) - maxsize,
+    		size: 20,
+    		color: "red"
+    	}
     }
+
+    function randomNum(n){
+    return Math.floor(Math.random() * n );
+    }
+
+    function createBoxes(n){
+    	for(i=0;i<3;i++){
+    		boxes.push(createBox())
+    	}
+    }
+
 
     function drawBox(){
-      context.fillStyle = box.color;
-      context.fillRect(box.x, box.y, box.size, box.size);
-    }
+      for(i=0;i<boxes.length;i++){
+      context.fillStyle = boxes[i].color;
+      context.fillRect(boxes[i].x, boxes[i].y, boxes[i].size, boxes[i].size);
+	      }
+  }
+   
+      createBoxes(3)
+      drawBox()
+      
+ 
 
-    function runGame(){
-    	drawBox()
-    }
-        runGame()
+    
 
 	</script>
-
-</body>
-</html>
+      </body>
+	</html>
