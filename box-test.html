@@ -17,16 +17,19 @@
     var context = canvas.getContext("2d");
     var boxes = []
     var color = ["red", "blue", "green", "orange", "purple", "yellow", "teal", "white" ,"silver", "brown" ]
-
-    var maxsize = 40
-    var maxDuration = 200
+    
+    var settings = {
+      numberOfBoxes: 20,
+      maxSize: 35,
+      maxDuration: 30
+    } 
 
     function createBox(){
 
     	return{
     		x: randomNum(canvas.width),
     		y: randomNum(canvas.height),
-    		size: randomNum(40),
+    		size: randomNum(maxSize),
     		color: color[randomNum(color.length)],
     		duration: randomNum(maxDuration) + 10
     	}
@@ -37,13 +40,13 @@
     }
 
     function createBoxes(n){
-    	for(i=0;i<20;i++){
+    	for(i=0;i<numberOfBoxes;i++){
     		boxes.push(createBox())
     	}
     }
 
 
-    function drawBoxes(){
+      function drawBoxes(){
       for(i=0;i<boxes.length;i++){
       context.fillStyle = boxes[i].color;
       context.fillRect(boxes[i].x, boxes[i].y, boxes[i].size, boxes[i].size);
@@ -56,13 +59,23 @@
       }
     }
 
+    function deleteExpiredBoxes(){
+      for(i=0;i<boxes.length;i++){
+        if(boxes[i].duration == 0){
+          boxes.splice(i,1);
+        }
+      }
+    }
+
       
     function runTest(){
+      context.clearRect(0,0,canvas.width,canvas.height);
       drawBoxes()
       reduceDuration()
+      deleteExpiredBoxes()
       requestAnimationFrame(runTest)
     }
-    createBoxes()
+    createBoxes(settings.numberOfBoxes)
     runTest() 
     console.log(boxes)  
       
