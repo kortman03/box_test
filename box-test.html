@@ -6,6 +6,7 @@
 	<style type="text/css">
     canvas {
       border: solid 1px #000;
+      background-color: black;
       
     }
 </style>
@@ -15,17 +16,19 @@
 	var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
     var boxes = []
-    var color = ["red", "blue", "green", "orange", "purple", "yellow", "teal", "white" ,                 "silver", "brown" ]
-    
+    var color = ["red", "blue", "green", "orange", "purple", "yellow", "teal", "white" ,"silver", "brown" ]
+
     var maxsize = 40
+    var maxDuration = 200
 
     function createBox(){
 
     	return{
-    		x: randomNum(canvas.width) - maxsize,
-    		y: randomNum(canvas.height) - maxsize,
+    		x: randomNum(canvas.width),
+    		y: randomNum(canvas.height),
     		size: randomNum(40),
-    		color: color[randomNum(color.length)]
+    		color: color[randomNum(color.length)],
+    		duration: randomNum(maxDuration) + 10
     	}
     }   
 
@@ -34,21 +37,26 @@
     }
 
     function createBoxes(n){
-    	for(i=0;i<3;i++){
+    	for(i=0;i<20;i++){
     		boxes.push(createBox())
     	}
     }
 
 
-    function drawBox(){
+    function drawBoxes(){
       for(i=0;i<boxes.length;i++){
       context.fillStyle = boxes[i].color;
       context.fillRect(boxes[i].x, boxes[i].y, boxes[i].size, boxes[i].size);
 	      }
   }
-   
-      createBoxes(3)
-      drawBox()     
+      
+    function runTest(){
+      drawBoxes();
+      requestAnimationFrame(runTest);
+    }
+    createBoxes();
+    runTest();  
+    console.log(boxes)  
       
  
 
