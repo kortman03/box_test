@@ -49,13 +49,21 @@
       context.fillRect(boxes[i].x, boxes[i].y, boxes[i].size, boxes[i].size);
 	      }
   }
+
+      function reduceDuration(){
+      for(i=0;i<boxes.length;i++){
+        boxes[i].duration -= 1;
+      }
+    }
+
       
     function runTest(){
-      drawBoxes();
-      requestAnimationFrame(runTest);
+      drawBoxes()
+      reduceDuration()
+      requestAnimationFrame(runTest)
     }
-    createBoxes();
-    runTest();  
+    createBoxes()
+    runTest() 
     console.log(boxes)  
       
  
