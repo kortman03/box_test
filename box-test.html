@@ -19,7 +19,7 @@
     var color = ["red", "blue", "green", "orange", "purple", "yellow", "teal", "white" ,"silver", "brown" ]
     
     var settings = {
-      numberOfBoxes: 20,
+      numberOfBoxes: 50,
       maxSize: 35,
       maxDuration: 30
     } 
@@ -29,9 +29,9 @@
     	return{
     		x: randomNum(canvas.width),
     		y: randomNum(canvas.height),
-    		size: randomNum(maxSize),
+    		size: randomNum(settings.maxSize),
     		color: color[randomNum(color.length)],
-    		duration: randomNum(maxDuration) + 10
+    		duration: randomNum(settings.maxDuration) + 10
     	}
     }   
 
@@ -40,7 +40,7 @@
     }
 
     function createBoxes(n){
-    	for(i=0;i<numberOfBoxes;i++){
+    	for(i=0;i<n;i++){
     		boxes.push(createBox())
     	}
     }
@@ -63,6 +63,7 @@
       for(i=0;i<boxes.length;i++){
         if(boxes[i].duration == 0){
           boxes.splice(i,1);
+          createBoxes(1)
         }
       }
     }
